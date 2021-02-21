@@ -3,6 +3,7 @@ from Transaction import *
 from typing import List
 from hashlib import sha256
 from queue import Queue
+from BlockChain import *
 
 class Node:
     def __init__(self, genesisBlock: Block = None, nodeID = None):
