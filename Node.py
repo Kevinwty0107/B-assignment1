@@ -64,7 +64,7 @@ class Node:
         TxNumHash = self.verifyTxNumberHash(tx) # number hash is correct
         TxInNum = self.verifyTxInputsNumber(tx) # each number in the input exists as a transaction already on the blockchain, each output in the input actually exists in the named transaction
         TxPKsig = self.verifyTxPubKeyAndSig(tx) # each output in the input has the same public key, and that key can verify the signature on this transaction
-        TxDS = verifyTxDoubleSpend(tx) # that public key is the most recent recipient of that output (i.e. not a double-spend)
+        TxDS = self.verifyTxDoubleSpend(tx) # that public key is the most recent recipient of that output (i.e. not a double-spend)
         TxIOSum = self.verifyTxInOutSum(tx) # the sum of the input and output values are equal
         return TxNumHash and TxInNum and TxPKsig and TxDS and TxIOSum
 
@@ -131,7 +131,7 @@ class Node:
                 prevBlock = prevBlock.prevBlockNode
             return True
 
-    def __verifyTxInOutSum(self, tx: Transaction) :
+    def verifyTxInOutSum(self, tx: Transaction) :
         #  the sum of the input and output values are equal
         inSum, outSum = 0, 0
         inSum = np.sum([x.output.value for x in tx.inputList])
