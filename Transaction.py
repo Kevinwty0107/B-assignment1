@@ -59,7 +59,7 @@ class Transaction:
         hashList = []
         hashList = self.inputList + self.outputList
         hashList.append(self.sig)
-        return sha256(''.join(itemList).encode('utf-8')).hexdigest()
+        return sha256(''.join(hashList).encode('utf-8')).hexdigest()
 
     def toString(self):
         outputList = [str(self.txNumber)]
